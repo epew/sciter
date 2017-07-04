@@ -1,0 +1,782 @@
+@font-face {
+  font-family: 'DINPro';
+  src: url("../resources/fonts/DINPRO-REGULAR.OTF");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINPro-Light';
+  src: url("../resources/fonts/DINPRO-LIGHT.OTF");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINPro-Bold';
+  src: url("../resources/fonts/DINPRO-BOLD.OTF");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINPro-Cond';
+  src: url("../resources/fonts/DINPro-Cond.otf");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINPro-Medium';
+  src: url("../resources/fonts/DINPRO-MEDIUM.OTF");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINPro-CondBold';
+  src: url("../resources/fonts/DINPro-CondBold.otf");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINPro-CondLight';
+  src: url("../resources/fonts/DINPro-CondLight.otf");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINPro-CondBlack';
+  src: url("../resources/fonts/DINPro-CondBlack.otf");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINnextLTPro-Regular';
+  src: url("../resources/fonts/DINNextLTPro-Regular.otf");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINnextLTPro-Medium';
+  src: url("../resources/fonts/DINNextLTPro-Medium.otf");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'DINnextLTPro-Condensed';
+  src: url("../resources/fonts/DINNextLTPro-Condensed.otf");
+  font-weight: normal;
+  font-style: normal; }
+*[hidden] {
+  display: none; }
+
+@set my-v-scrollbar {
+  .prev {
+    display: none; }
+
+  .next {
+    display: none; }
+
+  .base,
+  .next-page,
+  .prev-page {
+    background: transparent; }
+
+  .slider {
+    background: #9E9D9D; }
+
+  .base:disabled {
+    background: #aaa; }
+
+  .base {
+    width: 6dip; }
+
+  /* explicit declaration of its width */
+  .corner {
+    background: transparent; } }
+html {
+  background: transparent;
+  overflow: hidden; }
+
+body {
+  width: 800dip;
+  height: 600dip;
+  min-height: min-content;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 10dip rgba(0, 0, 0, 0.2);
+  margin: 10dip;
+  flow: horizontal;
+  background-image: url("../resources/imgs/Waves.png");
+  background-repeat: no-repeat;
+  background-position: 100% 100%; }
+
+ul li {
+  list-style: none; }
+
+header {
+  height: 30dip; }
+  header button {
+    float: right;
+    border: none;
+    padding-left: 10dip;
+    background: transparent;
+    font-size: 14dip;
+    color: #666; }
+    header button:hover {
+      cursor: pointer;
+      color: #E65100; }
+  header .close_player {
+    padding-right: 10dip; }
+
+span.number_of_votes {
+  width: 25dip;
+  margin-left: 5dip;
+  font-family: "DINnextLTPro-Medium";
+  font-size: 12dip;
+  color: #E65100; }
+
+span.cover_image {
+  prototype: addCover;
+  position: relative;
+  width: 25dip;
+  height: 25dip;
+  top: 7dip;
+  color: transparent;
+  font-size: 0;
+  background-color: #78AB46;
+  border-radius: 50%;
+  background-size: 25dip 25dip;
+  background-repeat: no-repeat; }
+
+span.song_cover {
+  visibility: hidden;
+  display: none;
+  width: 0;
+  height: 0; }
+
+span.song_name {
+  margin-left: 10dip;
+  width: 185dip;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: "DINnextLTPro-Medium";
+  font-size: 12dip;
+  color: #161414; }
+
+span.artist_song_line {
+  padding-left: 3dip; }
+
+span.song_title {
+  color: #161414;
+  font-family: "DINPro-Cond";
+  font-size: 13dip; }
+
+span.vote_song {
+  prototype: addVoteEvents;
+  display: inline-block;
+  padding-right: 5dip;
+  float: right;
+  text-transform: uppercase;
+  font-family: "DINPro-CondBlack";
+  color: #9E9D9D; }
+  span.vote_song:hover {
+    cursor: pointer;
+    color: #E65100; }
+
+span.song_id {
+  visibility: hidden; }
+
+.side {
+  display: inline-block; }
+
+.hide {
+  visibility: hidden; }
+
+.show {
+  visibility: visible; }
+
+.left_side {
+  position: relative;
+  width: 380dip; }
+  .left_side .title_artist {
+    margin-bottom: 30dip; }
+    .left_side .title_artist .name_artist {
+      display: block;
+      width: 380dip;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: "DINPro";
+      font-size: 23dip;
+      color: #000; }
+    .left_side .title_artist .name_song {
+      display: block;
+      width: 380dip;
+      text-align: center;
+      font-family: "DINPro-Light";
+      font-size: 17dip;
+      color: #9E9D9D; }
+    .left_side .title_artist .song_id_now_play {
+      display: none;
+      visibility: hidden;
+      width: 0;
+      height: 0; }
+  .left_side .playing_song {
+    position: relative;
+    width: 375dip;
+    height: 180dip;
+    padding-bottom: 20dip;
+    background-image: url("../resources/imgs/Beat-Bars.png");
+    background-repeat: no-repeat; }
+    .left_side .playing_song .play_song {
+      display: inline-block; }
+    .left_side .playing_song .remaining_playing_song_time {
+      position: relative;
+      float: left;
+      top: 145dip;
+      margin-left: 25dip;
+      font-family: "DINPro-CondBold";
+      font-size: 30dip;
+      color: #E65100; }
+    .left_side .playing_song .progress_container {
+      position: absolute;
+      right: 98dip;
+      bottom: -6dip;
+      size: 169dip;
+      font-size: 30dip;
+      vertical-align: middle;
+      text-align: center; }
+    .left_side .playing_song .playing_number_votes {
+      font-family: "DINPro-CondBold";
+      font-size: 30dip;
+      color: #E65100; }
+    .left_side .playing_song .playng_votes_text {
+      text-transform: uppercase;
+      font-family: "DINPro-Cond";
+      font-size: 16dip;
+      color: #9E9D9D; }
+    .left_side .playing_song .rotate_disk_timer_wrapper {
+      position: relative;
+      padding-top: 5dip;
+      margin-left: 112dip; }
+    .left_side .playing_song .disk_timer {
+      aspect: Spin;
+      position: relative;
+      width: 160dip;
+      height: 160dip;
+      background-image: url("../resources/imgs/covers/maiden/matter_life_death_maiden.jpg");
+      background-size: 160dip 160dip;
+      border-radius: 50%; }
+      .left_side .playing_song .disk_timer .disk_center {
+        position: absolute;
+        top: 63dip;
+        right: 63dip;
+        width: 35dip;
+        height: 35dip;
+        z-index: 10;
+        background-color: #FFF;
+        border-radius: 50%; }
+    .left_side .playing_song .playing_song_votes {
+      position: relative;
+      padding-right: 15dip;
+      float: right;
+      bottom: 181dip; }
+  .left_side .playing_song_lyrics {
+    padding-bottom: 22dip;
+    font-family: "DINnextLTPro-Regular";
+    font-size: 18dip;
+    color: #9E9D9D; }
+    .left_side .playing_song_lyrics span {
+      display: block;
+      width: 380dip;
+      text-align: center; }
+  .left_side .top_voted_songs_container {
+    width: 380dip;
+    height: 250dip;
+    margin-bottom: 30dip; }
+    .left_side .top_voted_songs_container span.top_voted_songs_title {
+      display: block;
+      width: 380dip;
+      padding-bottom: 10dip;
+      text-align: center;
+      font-family: "DINPro-CondBold";
+      font-size: 25dip;
+      color: #9E9D9D; }
+    .left_side .top_voted_songs_container ul {
+      margin-left: 15dip; }
+      .left_side .top_voted_songs_container ul li {
+        width: 310dip;
+        height: 38dip;
+        line-height: 38dip;
+        padding: 0;
+        margin: 0;
+        border-bottom: 1dip solid #EEEEEE; }
+        .left_side .top_voted_songs_container ul li span {
+          display: inline-block;
+          line-height: 38dip; }
+
+.right_side {
+  position: relative;
+  width: 380dip;
+  height: 570dip;
+  padding-left: 30dip; }
+  .right_side .search_favorite_song {
+    position: absolute;
+    top: 27dip; }
+  .right_side .right_content {
+    position: absolute;
+    top: 50dip;
+    bottom: 0; }
+
+.active_letter {
+  color: #E65100; }
+
+.search_wrapper {
+  position: relative;
+  margin-right: 5dip;
+  margin-left: 15dip;
+  width: 335dip;
+  height: 25dip; }
+  .search_wrapper span {
+    position: relative;
+    display: block;
+    width: 335dip;
+    height: 16dip;
+    line-height: 16dip;
+    padding-bottom: 5dip;
+    border-bottom: 1dip solid #9E9E9E;
+    text-align: center;
+    font-family: "DINPro-CondLight";
+    font-size: 16dip;
+    color: #9E9D9D; }
+  .search_wrapper input {
+    position: relative;
+    width: 335dip;
+    bottom: 25dip;
+    border: none;
+    background: transparent;
+    text-align: center;
+    color: #9E9D9D; }
+
+.search_favorite_song_in_top_container {
+  position: absolute;
+  right: 14dip;
+  top: -22dip; }
+
+.search_from_genres {
+  position: absolute;
+  top: -23dip !important; }
+
+#genres_list {
+  position: relative;
+  display: block;
+  width: 360dip;
+  height: 520dip; }
+  #genres_list .search_song_in_genres {
+    display: none;
+    position: absolute;
+    top: -1dip;
+    right: 10dip;
+    left: 14dip;
+    bottom: 25dip;
+    overflow: hidden;
+    background-color: #F5F5F5; }
+    #genres_list .search_song_in_genres ul {
+      margin-top: 10dip;
+      margin-bottom: 10dip;
+      position: relative;
+      height: 470dip;
+      padding-left: 5dip;
+      overflow: scroll-indicator;
+      vertical-scrollbar: my-v-scrollbar;
+      overflow: auto;
+      overflow-x: hidden; }
+      #genres_list .search_song_in_genres ul li {
+        height: 38dip;
+        line-height: 38dip;
+        padding: 0;
+        margin: 0;
+        border-bottom: 1dip solid #EEEEEE;
+        margin-right: 5dip; }
+        #genres_list .search_song_in_genres ul li span {
+          display: inline-block;
+          line-height: 38dip; }
+  #genres_list span.vote_song_genres_text {
+    display: block;
+    width: 360dip;
+    margin-top: 28dip;
+    margin-bottom: 20dip;
+    font-family: "DINPro-CondBold";
+    font-size: 25dip;
+    text-align: center;
+    color: #9E9D9D; }
+  #genres_list .genres_block {
+    width: 350dip;
+    height: 315dip;
+    overflow: scroll-indicator;
+    vertical-scrollbar: my-v-scrollbar;
+    overflow: auto;
+    overflow-x: hidden; }
+  #genres_list .genre_type {
+    display: inline-block;
+    height: 50dip;
+    width: 153dip;
+    margin-left: 15dip;
+    margin-bottom: 12dip;
+    background-color: #F5F5F5;
+    text-align: center;
+    border-bottom: 1dip solid #9E9D9D;
+    color: #E65100; }
+    #genres_list .genre_type:hover {
+      cursor: pointer;
+      border-bottom: 1dip solid #E65100; }
+      #genres_list .genre_type:hover span {
+        color: #E65100; }
+    #genres_list .genre_type span {
+      width: 150dip;
+      height: 50dip;
+      line-height: 50dip;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 18dip;
+      font-family: "DINPro-Bold";
+      color: #9E9D9D; }
+  #genres_list .out_tops {
+    text-align: center; }
+    #genres_list .out_tops span.undecided_text {
+      display: block;
+      margin-top: 20dip;
+      font-family: "DINPro-CondBold";
+      font-size: 25dip;
+      color: #E65100; }
+    #genres_list .out_tops .see_our_tops_btn {
+      margin-top: 8dip;
+      font-size: 14dip;
+      font-family: "DINPro";
+      text-align: center;
+      color: #FFF; }
+      #genres_list .out_tops .see_our_tops_btn span {
+        position: relative;
+        left: 105dip;
+        display: block;
+        width: 150dip;
+        height: 30dip;
+        line-height: 27dip;
+        background-color: #9E9D9D;
+        border-radius: 12dip; }
+        #genres_list .out_tops .see_our_tops_btn span:hover {
+          cursor: pointer;
+          background-color: #E65100; }
+
+#song_list {
+  visibility: hidden;
+  position: absolute;
+  top: -1dip;
+  right: 10dip;
+  left: 15dip;
+  bottom: 25dip;
+  background-color: #F5F5F5; }
+  #song_list header {
+    margin-top: 20dip;
+    margin-bottom: 15dip;
+    margin-left: 38dip; }
+    #song_list header span {
+      display: inline-block; }
+    #song_list header .back_button {
+      width: 15dip;
+      height: 15dip;
+      line-height: 23dip;
+      background-image: url("../resources/imgs/back.png");
+      background-size: 15dip 15dip;
+      background-repeat: no-repeat;
+      padding-right: 15dip; }
+      #song_list header .back_button:hover {
+        cursor: pointer;
+        background-image: url("../resources/imgs/back_hover.png"); }
+    #song_list header .the_genre {
+      margin-right: 15dip;
+      font-size: 23dip;
+      font-family: "DINPro-Bold";
+      text-transform: uppercase;
+      color: #9E9D9D; }
+  #song_list .selected_genre_songs_wrapper {
+    height: 352dip;
+    overflow: hidden;
+    border-bottom: 2dip solid #9E9E9E; }
+  #song_list ul {
+    position: relative;
+    height: 352dip;
+    padding-left: 5dip;
+    overflow: scroll-indicator;
+    vertical-scrollbar: my-v-scrollbar;
+    overflow: auto;
+    overflow-x: hidden; }
+    #song_list ul li {
+      height: 38dip;
+      line-height: 38dip;
+      padding: 0;
+      margin: 0;
+      border-bottom: 1dip solid #EEEEEE;
+      margin-right: 5dip; }
+      #song_list ul li span {
+        display: inline-block;
+        line-height: 38dip; }
+  #song_list .letter_filter {
+    margin-top: 5dip;
+    padding-left: 6dip;
+    padding-right: 3dip; }
+    #song_list .letter_filter .letter {
+      prototype: filterSongs;
+      display: inline-block;
+      width: 7dip;
+      line-height: 30dip;
+      padding: 2dip 6dip 2dip 7dip;
+      text-transform: uppercase;
+      font-family: "DINPro-Bold";
+      font-size: 15dip;
+      color: #9E9D9D; }
+      #song_list .letter_filter .letter:hover {
+        cursor: pointer;
+        color: #E65100; }
+
+.filter_active {
+  color: #E65100 !important; }
+
+#top_voted_song {
+  visibility: hidden;
+  position: absolute;
+  top: 49dip;
+  right: 30dip;
+  left: 44dip;
+  bottom: 25dip;
+  background-color: #F5F5F5; }
+  #top_voted_song header {
+    margin-top: 20dip;
+    margin-bottom: 8dip;
+    margin-left: 38dip; }
+    #top_voted_song header span {
+      display: inline-block; }
+    #top_voted_song header .back_button {
+      width: 15dip;
+      height: 15dip;
+      line-height: 23dip;
+      background-image: url("../resources/imgs/back.png");
+      background-size: 15dip 15dip;
+      background-repeat: no-repeat;
+      padding-right: 15dip; }
+      #top_voted_song header .back_button:hover {
+        cursor: pointer;
+        background-image: url("../resources/imgs/back_hover.png"); }
+    #top_voted_song header .the_genre {
+      font-size: 23dip;
+      font-family: "DINPro-CondBold";
+      color: #9E9D9D; }
+  #top_voted_song .period_top_songs {
+    border-bottom: 1dip solid #FFF; }
+    #top_voted_song .period_top_songs span {
+      display: inline-block;
+      width: 108dip;
+      text-align: center;
+      line-height: 50dip;
+      font-family: "DINPro-CondBold";
+      font-size: 13dip;
+      text-transform: uppercase;
+      color: #9E9D9D; }
+      #top_voted_song .period_top_songs span:hover {
+        cursor: pointer;
+        background-color: #E65100;
+        color: #FFF; }
+  #top_voted_song .selected_genre_songs_wrapper {
+    height: 390dip;
+    overflow: hidden; }
+  #top_voted_song ul {
+    position: relative;
+    height: 380dip;
+    padding-left: 5dip;
+    overflow: scroll-indicator;
+    vertical-scrollbar: my-v-scrollbar;
+    overflow: auto;
+    overflow-x: hidden; }
+    #top_voted_song ul li {
+      height: 38dip;
+      line-height: 38dip;
+      padding: 0;
+      margin: 0;
+      border-bottom: 1dip solid #EEEEEE;
+      margin-right: 5dip; }
+      #top_voted_song ul li span {
+        display: inline-block;
+        line-height: 38dip; }
+
+.active {
+  background-color: #E65100;
+  color: #FFF !important; }
+
+#request_song {
+  visibility: hidden;
+  z-index: 10000000;
+  position: absolute;
+  top: 49dip;
+  right: 30dip;
+  left: 44dip;
+  bottom: 25dip;
+  background-color: #F5F5F5; }
+  #request_song .back_button {
+    z-index: 1000;
+    position: absolute;
+    top: -25dip;
+    left: 35dip;
+    width: 15dip;
+    height: 15dip;
+    line-height: 23dip;
+    background-image: url("../resources/imgs/back.png");
+    background-size: 15dip 15dip;
+    background-repeat: no-repeat;
+    padding-right: 15dip; }
+    #request_song .back_button:hover {
+      cursor: pointer;
+      background-image: url("../resources/imgs/back_hover.png"); }
+  #request_song .sorry_image {
+    position: relative;
+    left: 110dip;
+    top: 100dip;
+    width: 120dip;
+    height: 120dip;
+    background-image: url("../resources/imgs/SadPunkFace.svg");
+    background-repeat: no-repeat;
+    background-size: 120dip 120dip; }
+  #request_song .sorry_message {
+    position: relative;
+    left: 10dip;
+    top: 140dip;
+    width: 320dip;
+    position: relative;
+    text-align: center; }
+    #request_song .sorry_message span {
+      display: block;
+      font-family: "DINnextLTPro-Condensed";
+      font-size: 14dip;
+      color: #9E9D9D; }
+  #request_song .request_song_btn {
+    position: relative;
+    top: 155dip;
+    left: 90dip;
+    width: 150dip;
+    height: 30dip;
+    line-height: 30dip;
+    background-color: #E65100;
+    border-radius: 12dip;
+    font-family: "DINnextLTPro-Regular";
+    font-size: 14dip;
+    text-align: center;
+    color: #FFF; }
+    #request_song .request_song_btn:hover {
+      cursor: pointer;
+      background-color: #9E9D9D; }
+
+#voted_song {
+  visibility: hidden;
+  position: absolute;
+  top: -1dip;
+  right: 10dip;
+  left: 15dip;
+  bottom: 25dip; }
+  #voted_song span {
+    display: block; }
+  #voted_song .title_voted {
+    position: relative;
+    width: 360dip;
+    height: 50dip;
+    top: 10dip;
+    margin-right: 5dip;
+    margin-left: 15dip;
+    font-family: "DINPro-CondBold";
+    font-size: 25dip;
+    color: #9E9D9D;
+    text-align: center; }
+  #voted_song .voted_song_container {
+    margin-left: 30dip;
+    position: relative;
+    background-color: #F5F5F5;
+    width: 336dip;
+    height: 495dip; }
+  #voted_song .voted_song_info_wrapper .voted_song_votes {
+    width: 336dip;
+    margin-top: 6dip;
+    font-family: "DINPro-Cond";
+    font-size: 25dip;
+    text-align: center;
+    text-transform: uppercase;
+    color: #E65100; }
+  #voted_song .voted_song_info_wrapper .voted_song_cover {
+    position: relative;
+    left: 68dip;
+    width: 220dip;
+    height: 150dip;
+    margin-top: 20dip;
+    margin-bottom: 20dip;
+    background-size: cover;
+    background-repeat: no-repeat stretch; }
+  #voted_song .voted_song_info_wrapper .voted_song_artist {
+    width: 336dip;
+    font-family: "DINPro-Medium";
+    font-size: 20dip;
+    color: #000;
+    text-align: center;
+    text-transform: uppercase; }
+  #voted_song .voted_song_info_wrapper .voted_song_title {
+    width: 320dip;
+    text-align: center;
+    font-family: "DINPro-Light";
+    font-size: 16dip;
+    color: #9E9D9D;
+    padding-bottom: 20dip;
+    margin-left: 8dip;
+    margin-bottom: 20dip;
+    border-bottom: 1dip solid #FFF; }
+  #voted_song .info_next_vote .info_vote {
+    width: 336dip;
+    font-family: "DINnextLTPro-Condensed";
+    font-size: 12dip;
+    text-align: center;
+    color: #9E9D9D; }
+  #voted_song .info_next_vote .timer_until_next_vote {
+    position: relative;
+    left: 130dip;
+    width: 65dip;
+    height: 65dip;
+    margin-bottom: 15dip;
+    margin-top: 10dip; }
+  #voted_song .info_next_vote .white_circle {
+    width: 65dip;
+    height: 65dip;
+    border: 2dip solid #FFF;
+    border-radius: 50%; }
+  #voted_song .info_next_vote span.time_left {
+    line-height: 65dip;
+    width: 65dip;
+    font-family: "DINPro-CondBold";
+    font-size: 21dip;
+    color: #E65100;
+    text-align: center; }
+  #voted_song .info_next_vote .clear_vote_btn {
+    margin-top: 8dip;
+    font-size: 14dip;
+    font-family: "DINPro";
+    text-align: center;
+    color: #FFF; }
+    #voted_song .info_next_vote .clear_vote_btn span {
+      position: relative;
+      left: 95dip;
+      display: block;
+      width: 150dip;
+      height: 30dip;
+      line-height: 27dip;
+      background-color: #E65100;
+      border-radius: 12dip; }
+      #voted_song .info_next_vote .clear_vote_btn span:hover {
+        cursor: pointer;
+        background-color: #9E9D9D; }
+
+.progress_container {
+  position: absolute;
+  border-radius: 50%; }
+  .progress_container #progressRight {
+    aspect: progressSong;
+    position: relative;
+    right: 5dip;
+    bottom: 5dip;
+    width: 170dip;
+    height: 170dip;
+    background-color: #ff69b4;
+    border-radius: 50%;
+    list-style-image: none;
+    foreground: #E65100; }
+
+/*# sourceMappingURL=style.css.map */

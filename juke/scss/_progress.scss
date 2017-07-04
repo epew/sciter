@@ -1,0 +1,26 @@
+.progress_container{
+	position:absolute;
+	border-radius: 50%;
+
+	#progressRight{
+		aspect: progressSong;
+		
+		position:relative;
+		right: 5dip;
+		bottom: 5dip;
+		width: 170dip;
+		height: 170dip;
+		background-color: #ff69b4;
+		border-radius: 50%;
+		list-style-image: none;
+		// transform: rotate(-45deg);
+
+		foreground: $color_5 ; 
+		// foreground-repeat: stretch keep-ratio;
+		// foreground-position: 50% 50%;
+
+	}
+
+}
+
+

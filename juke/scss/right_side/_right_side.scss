@@ -1,0 +1,25 @@
+.right_side{
+	position: relative;
+	width: $one_side_width; //360 to use
+	height: 570dip;
+	padding-left: 30dip;
+
+	.search_favorite_song{
+		position:absolute;
+		top: 27dip;
+	}
+
+	.right_content{
+		position: absolute;
+		top: 50dip;
+		bottom: 0;
+	}
+}
+
+#right_side_content_with_search{
+	// visibility : hidden;
+}
+
+.active_letter{
+	color: $color_5;
+}

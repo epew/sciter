@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="UTF-8">
+	<title>JukeBox BitPlayer</title>
+
+	<link rel="stylesheet" href="css/style.css">
+
+	<script type="text/tiscript">
+		include "js/custom_scripts/json.tis";
+		
+    	include "js/custom_scripts/app_state.tis";
+    	include "js/custom_scripts/main.tis";
+    	include "js/custom_scripts/search.tis";
+    	include "js/custom_scripts/top.tis";
+
+    	self.ready = function() {
+    		start();
+    	}
+	</script>
+</head>
+<body>
+
+	<div class="container">
+		<header class="player_header">
+			<button class="close_player" title="close">x</button>
+			<button class="minimise_player" title="minimise">_</button>
+		</header>
+
+		<div class="side left_side">
+
+			<div class="title_artist">
+				<span class="name_artist"></span>
+				<span class="name_song"></span>
+				<span class="song_id_now_play"></span>
+			</div>
+
+			<div class="playing_song">
+				<span class="play_song remaining_playing_song_time"></span>
+
+				<div class="rotate_disk_timer_wrapper">
+					 <div #songprogress class="progress_container">
+					 	<!-- <input class="progress_input"/> -->
+					 </div>
+					<div class="play_song disk_timer">
+						<div class="disk_center"></div>
+					</div>
+				</div>
+
+				<span class="play_song playing_song_votes">
+					<span class="playing_number_votes"></span>
+					<span class="playng_votes_text">votes</span>
+				</span>
+			</div>
+
+			<div class="playing_song_lyrics">
+				<span class="first_row_lyrics_playing_song">Here is the soul of a man</span>
+				<span class="second_row_lyrics_playing_song">Time to speak with the shaman again</span>
+			</div>
+
+			<div class="top_voted_songs_container">
+				<span class="top_voted_songs_title">Top Voted Songs</span>
+				<div class="top_voted_songs_songs">
+					<ul class="top_voted_songs_list">
+					</ul>
+				</div>
+			</div>
+		</div><!--left_side-->
+
+		<div class="side right_side">
+
+			<div class="wrapping_the_serach" id="right_side_content_with_search">
+
+				<div class="search_favorite_song">
+					<div class="search_wrapper">
+						<span class="serach_text">
+							<span class="hide_on_focus">
+								Search Your Favorite Song
+							</span>
+						</span>
+						<input type="text" class="find_song"/>
+					</div>
+				</div> <!--search_favorite_song-->
+
+				<div class="right_content">
+
+					<div class="search_from_genres">
+						<div class="search_wrapper">
+							<span class="serach_text">
+								<span class="hide_text_search_genres">
+									Search Your Favorite Song
+								</span>
+							</span>
+							<input type="text" class="find_song_from_genres"/>
+						</div>
+					</div> <!--search_favorite_song-->
+
+					<div class="sort_song_by_generes_container" id="genres_list">
+						
+						<span class="vote_song_genres_text">
+							Vote your song
+						</span>
+
+						<div class="genres_block"></div>
+
+						<div class="search_song_in_genres">
+							<ul class="genre_find_song">
+							</ul>
+						</div>
+						
+						<div class="out_tops">
+							<span class="undecided_text">Undecided?</span>
+							<div class="see_our_tops_btn">
+								<span>see our tops</span>
+							</div>
+						</div>
+					</div><!--genres_list-->
+					
+					<div class="selected_genre_songs" id="song_list">
+						<header class="selected_genre">
+							<span class="back_button" id="clearSongs"></span>
+							<span class="the_genre"></span>
+						</header>
+
+						<div class="selected_genre_songs_wrapper">
+							<ul class="selected_genre_songs_list"></ul>
+						</div>
+						<div class="letter_filter">
+							<div class="firts_row">
+								<span class="letter">a</span>
+								<span class="letter">b</span>
+								<span class="letter">c</span>
+								<span class="letter">d</span>
+								<span class="letter">e</span>
+								<span class="letter">f</span>
+								<span class="letter">g</span>
+								<span class="letter">h</span>
+								<span class="letter">i</span>
+								<span class="letter">j</span>
+								<span class="letter">k</span>
+								<span class="letter">l</span>
+								<span class="letter">m</span>
+							</div>
+							<div class="second_row">
+								<span class="letter">n</span>
+								<span class="letter">o</span>
+								<span class="letter">p</span>
+								<span class="letter">q</span>
+								<span class="letter">r</span>
+								<span class="letter">s</span>
+								<span class="letter">t</span>
+								<span class="letter">u</span>
+								<span class="letter">v</span>
+								<span class="letter">w</span>
+								<span class="letter">x</span>
+								<span class="letter">y</span>
+								<span class="letter">z</span>
+							</div>
+						</div>
+					</div><!--song_list selected_genre_songs-->
+
+
+
+				</div><!--right_content-->
+
+			</div><!--wrapping_the_serach-->
+
+			<div id="top_voted_song">
+
+				<div class="search_favorite_song_in_top_container">
+					<div class="search_wrapper">
+						<span class="serach_text">
+							<span class="search_in_top_text_hide">
+								Search Your Favorite Song
+							</span>
+						</span>
+						<input type="text" class="find_song_top_voted"/>
+					</div>
+				</div> <!--search_favorite_song-->
+
+				<div class="top_voted_content">
+					<header class="selected_genre">
+						<span class="back_button back_genre_top"></span>
+						<span class="the_genre">Our Top Voted Songs</span>
+					</header>
+
+					<div class="period_top_songs">
+						<span class="this_week">this week</span>
+						<span class="this_month">this month</span>
+						<span class="all_time">all time</span>
+					</div>
+
+					<div class="selected_genre_songs_wrapper">
+						<ul class="selected_genre_songs_list top_list">
+						</ul>
+					</div>
+				</div><!--top_voted_content-->
+			</div><!--top_voted_song-->
+
+			<div class="voted_song" id="voted_song">
+				<div class="title_voted">Your Voted Song</div>
+				<div class="voted_song_container">
+						
+					<div class="voted_song_info_wrapper">
+						<span class="voted_song_votes"></span>
+						<div class="voted_song_cover"></div>
+						<span class="voted_song_artist"></span>
+						<span class="voted_song_title"></span>
+					</div><!--votde_song_info_wrapper-->
+
+					<div class="info_next_vote">
+						<span class="info_vote">To vote next song you have to wait </span>
+						<span class="info_vote">until the curent one ends</span>
+						<div class="timer_until_next_vote">
+							<div class="white_circle">
+								<span class="time_left"></span>
+							</div>
+						</div>
+						<span class="cancel_info_vote info_vote">To cancel your vote press clear vote</span>
+						<div class="clear_vote_btn">
+							<span>clear vote</span>
+						</div>
+					</div><!--info_next_vote-->
+
+				</div><!--voted_song_container-->
+			</div> <!--voted_song-->
+
+
+			<div id="request_song">
+				<div class="back_button back_from_request"></div>
+				<div class="sorry_image"></div>
+				<div class="sorry_message">
+					<span>
+						We didn't find your song.
+					</span>
+					<span>
+						But don't be sad, you can make a request.
+					</span>
+				</div>
+				<div class="request_song_btn">request song</div>
+			</div><!--request_song-->
+
+		</div><!--right_side-->
+
+	</div><!--container-->
+	
+</body>
+</html>

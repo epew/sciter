@@ -1,0 +1,167 @@
+.left_side{
+	position:relative;
+	width: $one_side_width;
+
+	.title_artist{
+		margin-bottom: 30dip;
+
+		.name_artist{
+			display: block;
+			width: $one_side_width;
+			text-align: center;
+			text-transform: uppercase;
+			font-family: $font_3 ;
+			font-size: 23dip;
+			color: $color_4;
+		}
+
+		.name_song{
+			display: block;
+			width: $one_side_width;
+			text-align: center;
+			font-family: $font_4;
+			font-size: 17dip;
+			color: $color_3;
+		}
+		.song_id_now_play{
+			display: none;
+			visibility: hidden;
+			width: 0;
+			height: 0;
+		}
+	}
+
+	.playing_song{
+		position: relative;
+		width: 375dip;
+		height: 180dip;
+		padding-bottom: 20dip;
+		background-image: $image_background_playing_song;
+		background-repeat: no-repeat;
+
+		.play_song{
+			display: inline-block;
+		}
+
+		.remaining_playing_song_time{ 
+			position:relative;
+			float: left;
+			top:145dip;
+			margin-left: 25dip;
+			font-family: $font_2;
+			font-size: 30dip;
+			color: $color_5;
+		}
+
+		.progress_container{
+			position: absolute;
+			right: 98dip;
+			bottom: -6dip;
+			size:169dip;
+			font-size:30dip;
+			// border:1px dotted #aaa;
+			vertical-align:middle;
+			text-align:center;
+		}
+
+		// .progress_input{
+		// 	display: none;
+		// 	visibility: hidden;
+		// }
+
+		.playing_number_votes{
+			font-family: $font_2;
+			font-size: 30dip;
+			color: $color_5;
+		}
+
+		.playng_votes_text{
+			text-transform: uppercase;
+			font-family: $font_1;
+			font-size: 16dip;
+			color: $color_3;
+		}
+
+		.rotate_disk_timer_wrapper{
+			position: relative;
+			padding-top: 5dip;
+			margin-left: 112dip;
+		}
+
+		.disk_timer{
+			aspect: Spin; 
+			position: relative;
+			width: 160dip;
+			height: 160dip;
+			background-image: $image_demo_cover_playing_song;
+			background-size: 160dip 160dip;
+			border-radius: 50%;
+
+			.disk_center{
+				position:absolute;
+				top: 63dip;
+				right: 63dip;
+				width: 35dip;
+				height: 35dip;
+				z-index: 10;
+				background-color: $color_2;
+				border-radius: 50%;
+			}
+		}
+
+		.playing_song_votes{
+			position:relative;
+			padding-right: 15dip;
+			float: right;
+			bottom:181dip;
+		}
+	}
+
+	.playing_song_lyrics{
+		padding-bottom: 22dip;
+		font-family: $font_5;
+		font-size: 18dip;
+		color: $color_3;
+
+		span{
+			display: block;
+			width: $one_side_width;
+			text-align: center;
+		}
+	}
+
+	.top_voted_songs_container{
+		width: $one_side_width;
+		height: 250dip;
+		margin-bottom: 30dip;
+
+		span.top_voted_songs_title{
+			display: block;
+			width: $one_side_width;
+			padding-bottom: 10dip;
+			text-align: center;
+			font-family: $font_2;
+			font-size: 25dip;
+			color: $color_3;
+		}
+		
+		ul{
+			margin-left: 15dip;
+			li{
+				width: 310dip;
+				height: 38dip;
+				line-height: 38dip;
+				padding: 0;
+				
+				margin: 0;
+				border-bottom: 1dip solid $color_6;
+
+				span{
+					display: inline-block;
+					line-height: 38dip;
+				}
+			}
+		}
+	}
+}
+

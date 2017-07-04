@@ -1,0 +1,104 @@
+#song_list{
+	visibility: hidden;
+	position: absolute;
+	top: -1dip;
+	right:10dip;
+	left: 15dip;
+	bottom: 25dip;
+	background-color: $color_10;
+
+	header{
+		margin-top: 20dip;
+		margin-bottom: 15dip;
+		margin-left: 38dip;
+
+		span{
+			display: inline-block;
+		}
+
+		.back_button{
+			width: 15dip;
+			height: 15dip;
+			line-height: 23dip;
+			background-image: $back_button_normal;
+			background-size: 15dip 15dip;
+			background-repeat: no-repeat;
+			padding-right: 15dip;
+
+			&:hover{
+				cursor: pointer;
+				background-image: $back_button_hover;
+			}
+		}
+
+		.the_genre{
+			margin-right: 15dip;
+			font-size: 23dip;
+			font-family: $font_9 ;
+			text-transform: uppercase;
+			color: $color_3;
+		}
+	}
+
+	.selected_genre_songs_wrapper{
+		height: 352dip;
+		overflow: hidden;
+		border-bottom: 2dip solid $color_9;
+	}
+
+	.selected_genre_songs_list{
+		// visibility: hidden;
+	}
+	
+	ul{
+		position: relative;
+		height: 352dip;
+		padding-left: 5dip;
+		
+		overflow: scroll-indicator;
+	  	vertical-scrollbar: my-v-scrollbar;
+	  	overflow: auto;
+	  	overflow-x: hidden;
+
+		li{
+			height: 38dip;
+			line-height: 38dip;
+			padding: 0;
+			margin: 0;
+			border-bottom: 1dip solid $color_6;
+			margin-right:5dip;
+
+			span{
+				display: inline-block;
+				line-height: 38dip;
+			}
+		}
+	}
+	
+	.letter_filter{
+		margin-top: 5dip;
+		padding-left: 6dip;
+		padding-right: 3dip;
+
+		.letter{
+			prototype : filterSongs;
+			display: inline-block;
+			width: 7dip;
+			line-height: 30dip;
+			padding: 2dip 6dip 2dip 7dip;
+			text-transform: uppercase;
+			font-family: $font_9;
+			font-size: 15dip;
+			color: $color_3;
+
+			&:hover{
+				cursor: pointer;
+				color: $color_5;
+			}
+		}
+	}
+}
+
+.filter_active{
+	color: #E65100!important;
+}

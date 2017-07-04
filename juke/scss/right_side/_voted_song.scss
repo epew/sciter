@@ -1,0 +1,142 @@
+#voted_song{
+	visibility: hidden;
+	position: absolute;
+	top: -1dip;
+	right:10dip;
+	left: 15dip;
+	bottom: 25dip;
+
+	span{
+			display: block;
+		}
+
+	.title_voted{
+		position: relative;
+		width:360dip;
+		height: 50dip;
+		top: 10dip;
+		margin-right: 5dip;
+		margin-left: 15dip;
+		font-family: $font_2;
+		font-size: 25dip;
+		color: $color_3;
+		text-align: center;
+	}
+
+	.voted_song_container{
+		margin-left: 30dip;
+		position: relative;
+		background-color: $color_10;
+		width: 336dip;
+		height: 495dip;
+	}
+
+	.voted_song_info_wrapper{	
+
+		.voted_song_votes{
+			width: 336dip;
+			margin-top: 6dip;
+			font-family: $font_1;
+			font-size: 25dip;
+			text-align: center;
+			text-transform: uppercase;
+			color: $color_5;
+		}
+
+		.voted_song_cover{
+			position: relative;
+			left: 68dip;
+			width: 220dip;
+			height: 150dip;
+			margin-top: 20dip;
+			margin-bottom: 20dip;
+			background-size: cover;
+			background-repeat: no-repeat stretch;
+		}
+
+		.voted_song_artist{
+			width: 336dip;
+			font-family: $font_11;
+			font-size: 20dip;
+			color: $color_4;
+			text-align: center;
+			text-transform: uppercase;
+		}
+
+		.voted_song_title{
+			width: 320dip;
+			text-align: center;
+			font-family: $font_4;
+			font-size: 16dip;
+			color: $color_3;
+			padding-bottom: 20dip;
+			margin-left: 8dip;
+			margin-bottom: 20dip;
+			border-bottom: 1dip solid $color_2;
+		}
+	}
+
+	.info_next_vote{
+
+		.info_vote{
+			width: 336dip;
+
+			font-family: $font_10;
+			font-size: 12dip;
+			text-align: center;
+			color: $color_3;
+		}
+
+		.timer_until_next_vote{
+			position:relative;
+			left: 130dip;
+			width: 65dip;
+			height: 65dip;
+			margin-bottom: 15dip;
+			margin-top: 10dip;
+		}
+
+		.white_circle{
+			
+			width: 65dip;
+			height: 65dip;
+			border: 2dip solid $color_2;
+			border-radius: 50%;
+		}
+
+		span.time_left{
+			line-height: 65dip;
+			width: 65dip;
+			font-family: $font_2;
+			font-size: 21dip;
+			color: $color_5;
+			text-align: center;
+		}
+
+		.clear_vote_btn{
+			margin-top: 8dip;
+			font-size: 14dip;
+			font-family: $font_3;
+			text-align: center;
+			color : $color_2;
+
+			span{
+				position: relative;
+				left: 95dip;
+				display: block;
+				width: 150dip;
+				height: 30dip;
+				line-height: 27dip;
+				background-color: $color_5;
+				border-radius: 12dip;
+
+				&:hover{
+					cursor: pointer;
+					background-color: $color_3;
+				}
+			}
+		}
+
+	}
+
+}

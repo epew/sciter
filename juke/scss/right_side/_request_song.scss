@@ -1,0 +1,76 @@
+#request_song{
+	visibility: hidden;
+	z-index : 10000000;
+	position: absolute;
+	top: 49dip;
+	right:30dip;
+	left: 44dip;
+	bottom: 25dip;
+	background-color: $color_10;
+
+	.back_button{
+		z-index: 1000;
+		position: absolute;
+		top: -25dip;
+		left: 35dip;
+		width: 15dip;
+		height: 15dip;
+		line-height: 23dip;
+		background-image: $back_button_normal;
+		background-size: 15dip 15dip;
+		background-repeat: no-repeat;
+		padding-right: 15dip;
+
+		&:hover{
+			cursor: pointer;
+			background-image: $back_button_hover;
+		}
+	}
+	
+	.sorry_image{
+		position: relative;
+		left: 110dip;
+		top: 100dip;
+		width: 120dip;
+		height: 120dip;
+		background-image: $sorry_image;
+		background-repeat: no-repeat;
+		background-size: 120dip 120dip;
+	}
+
+	.sorry_message{
+		position:relative;
+		left: 10dip;
+		top: 140dip;
+		width: 320dip;
+		position: relative;
+		text-align: center;
+
+		span{
+			display: block;
+			font-family: $font_10;
+			font-size: 14dip;
+			color: $color_3;
+		}
+	}
+
+	.request_song_btn{
+		position: relative;
+		top: 155dip;
+		left: 90dip;
+		width: 150dip;
+		height: 30dip;
+		line-height: 30dip;
+		background-color: $color_5;
+		border-radius: 12dip;
+		font-family: $font_5;
+		font-size: 14dip;
+		text-align: center;
+		color: $color_2;
+
+		&:hover{
+			cursor: pointer;
+			background-color: $color_3;
+		}
+	}
+}

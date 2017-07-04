@@ -1,0 +1,15 @@
+@import '_font.scss';
+@import '_variables.scss';
+@import '_layout.scss';
+
+@import './left_side/_left_side.scss';
+
+@import './right_side/_right_side.scss';
+@import './right_side/_search.scss';
+@import './right_side/_genre_list.scss';
+@import './right_side/_songs_list.scss';
+@import './right_side/_top_voted_songs.scss';
+@import './right_side/_request_song.scss';
+@import './right_side/_voted_song.scss';
+
+@import '_progress.scss';

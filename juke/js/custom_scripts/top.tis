@@ -1,0 +1,537 @@
+/**
+* Function called when you click 'see out tops' button
+* @retunr : top of the month
+*/
+$(.see_our_tops_btn).on("click", function(){
+
+	$(#right_side_content_with_search).style#visibility = "hidden";
+	$(#top_voted_song).style#visibility = "visible";
+
+	$(.this_month).@.addClass("active");
+	$(.this_week).@.removeClass("active");
+	$(.all_time).@.removeClass("active");
+
+	topMonth();
+});
+
+/**
+* Function called when you click the all time button
+* @returns all the tops
+*/
+$(.all_time).on("click", function(){
+
+	if($(.this_week).@.hasClass("active")){
+		$(.this_week).@.removeClass("active");
+	}
+	if($(.this_month).@.hasClass("active")){
+		$(.this_month).@.removeClass("active");
+	}
+	$(.all_time).@.addClass("active");
+
+	allTimeTop();
+});
+
+/**
+* Function called when you click this month button
+* @return top music of this month
+*/
+$(.this_month).on("click", function(){
+	
+	$(.this_week).@.removeClass("active");		
+	$(.all_time).@.removeClass("active");
+	$(.this_month).@.addClass("active");
+
+	topMonth();
+});
+
+/**
+* Function called when  you click this week button
+* @return tops of this week
+*/
+$(.this_week).on("click", function(){
+	
+	$(.this_week).@.addClass("active");		
+	$(.all_time).@.removeClass("active");
+	$(.this_month).@.removeClass("active");
+
+	topWeek();
+});
+
+/**
+* Function calleed when you click the back button from 'our top' section
+* @returns the section whith the genres
+*/
+$(.back_genre_top).on("click", function(){
+	$(#right_side_content_with_search).style#visibility = "visible";
+	$(#top_voted_song).style#visibility = "hidden";
+});
+
+/**
+* Function that ordersour songs by votes
+*/
+ function arrangeTop(){
+
+	for(var i=0; i<appState.currentState.length-1; i++){
+        for(var j=i+1; j<appState.currentState.length; j++){
+            if(toInteger(appState.currentState[i].votes) < toInteger(appState.currentState[j].votes)){
+
+                var temp = appState.currentState[i];
+                appState.currentState[i] = appState.currentState[j];
+                appState.currentState[j] = temp;
+            }
+        }
+    }
+ }
+
+/**
+* Function that returns top 5 voted songs
+*/
+function topFive(){
+
+	var artist_now = $(.name_artist).value + "";
+    var song_now = $(.name_song).value + "";
+
+	arrangeTop();
+	var topFive = $(.top_voted_songs_list);
+	topFive.clear();
+
+	for(var i=1; i<appState.currentState.length; i++){
+		var currentSongId = appState.currentState[i].songId;
+
+        if(i < 6 ){
+
+            var artist = appState.songs[currentSongId].artist;
+            var art = artist+"";
+           
+            var song = appState.songs[currentSongId].songName;
+            var sng = song + "";
+
+            var votes = appState.currentState[i].votes + "";
+            var song_id = currentSongId+ "";
+           
+           var cover_ins = appState.songs[currentSongId].albumCoverUrl;
+
+            if(artist_now == art && song_now == sng){
+            	 // view.msgbox(#information, artist_now + song_now );
+            }
+            else{
+            	var insert_song = topFive.insert(
+			        { li, class:"item ", 
+			        	[
+			        		{span, class:"number_of_votes ", [votes]},
+			        		{span, class:"cover_image", []},
+			        		{span, class:"song_name", 
+			        			[
+			        				artist,
+			        				{span,class:"artist_song_line" ,"-\u0020"},
+			        				{span, class:"song_title",[song]}
+			        			]
+			        		},
+			        		{span, class:"vote_song", 
+			        			["vote",
+			        				{span, class:"song_id", [song_id]},
+			        			]
+			        		}
+			        		
+			        	]
+			        }
+			    );
+
+			    insert_song.$(.cover_image).style#background-image = "url('"+(cover_ins)+"')";
+            }
+
+	        
+    	}
+    }	
+}
+
+/**
+* Function that returns the top of the month
+*/
+function topWeek(){
+
+	var ul = $(.top_list);
+	ul.clear();
+
+	var day = getDay();
+	var crt_month = getMonth();
+	var number_day = dayOfTheWeek();
+	var ids = [];
+
+	var days_length = toInteger(day) - toInteger(number_day);
+
+	for( var (k,v) in appState.history) {
+    	
+    	var _k = k.split("/");
+    	var _day = _k[0];
+    	var _month = _k[1];
+    	var _year = _k[2];
+
+    	if( (crt_month == _month) && (_day >= days_length && _day <= day)){
+    		for(var (n,m) in v){
+    			ids.push(n);
+    		}
+    	}
+    }
+
+	for(var i=0; i<ids.length-1; i++){
+	    for(var j=i+1; j<ids.length; j++){
+	        if(ids[i] < ids[j]){
+
+	            var temp = ids[i];
+	            ids[i] =ids[j];
+	            ids[j] = temp;
+	        }
+	    }
+	}
+
+    for(var i=0; i<ids.length-1; i++){
+	    if(ids[i] == ids[i+1]){
+        	ids.splice(i, 1);
+        	i--;
+        }
+    }
+
+    for(var i=0; i<ids.length; i++){
+    	var currentSongId = ids[i];
+
+    	var artist = appState.songs[currentSongId].artist;
+        var song = appState.songs[currentSongId].songName;
+        var votes = appState.currentState[i].votes + "";
+        var song_id = currentSongId+ "";
+        var cover_ins = appState.songs[currentSongId].albumCoverUrl;
+
+        var insert_song = ul.insert(
+	        { li, class:"item ", 
+	        	[
+	        		{span, class:"number_of_votes ", [votes]},
+	        		{span, class:"cover_image", []},
+	        		{span, class:"song_name", 
+	        			[
+	        				artist,
+	        				{span,class:"artist_song_line" ,"-\u0020"},
+	        				{span, class:"song_title",[song]}
+	        			]
+	        		},
+	        		{span, class:"vote_song", 
+	        			["vote",
+	        				{span, class:"song_id", [song_id]},
+	        			]
+	        		}
+	        		
+	        	]
+	        }
+	    );
+
+	    insert_song.$(.cover_image).style#background-image = "url('"+(cover_ins)+"')";
+    }
+}
+
+/**
+* Function that returns top songs of the month
+*/
+function topMonth(){
+
+	var ul = $(.top_list);
+	var ids = [];
+	ul.clear();
+
+    var current_month = getMonth();
+
+    for( var (k,v) in appState.history) {
+    	
+    	var _k = k.split("/");
+    	var _day = _k[0];
+    	var _month = _k[1];
+    	var _year = _k[2];
+
+    	if(_month === current_month){
+    	
+    		for(var (n,m) in v){
+    			ids.push(n);
+    		}
+
+    	}
+    }
+
+    for(var i=0; i<ids.length-1; i++){
+        for(var j=i+1; j<ids.length; j++){
+            if(ids[i] < ids[j]){
+
+                var temp = ids[i];
+                ids[i] =ids[j];
+                ids[j] = temp;
+            }
+        }
+    }
+
+    for(var i=0; i<ids.length-1; i++){
+	    if(ids[i] == ids[i+1]){
+        	ids.splice(i, 1);
+        	i--;
+        }
+    }
+
+    for(var i=0; i<ids.length; i++){
+    	var currentSongId = ids[i];
+
+    	var artist = appState.songs[currentSongId].artist;
+        var song = appState.songs[currentSongId].songName;
+        var votes = appState.currentState[i].votes + "";
+        var song_id = currentSongId+ "";
+        var cover_ins = appState.songs[currentSongId].albumCoverUrl;
+
+        var insert_song = ul.insert(
+	        { li, class:"item ", 
+	        	[
+	        		{span, class:"number_of_votes ", [votes]},
+	        		{span, class:"cover_image", []},
+	        		{span, class:"song_name", 
+	        			[
+	        				artist,
+	        				{span,class:"artist_song_line" ,"-\u0020"},
+	        				{span, class:"song_title",[song]}
+	        			]
+	        		},
+	        		{span, class:"vote_song", 
+	        			["vote",
+	        				{span, class:"song_id", [song_id]},
+	        			]
+	        		}
+	        		
+	        	]
+	        }
+	    );
+
+	    insert_song.$(.cover_image).style#background-image = "url('"+(cover_ins)+"')";
+    }
+}
+
+/**
+* Retunrs all time top music
+*/
+function allTimeTop(){
+
+	arrangeTop();
+	var ul = $(.top_list);
+	ul.clear();
+
+	for(var i=0; i<appState.currentState.length; i++){
+		var currentSongId = appState.currentState[i].songId;
+	
+        var artist = appState.songs[currentSongId].artist;
+        var song = appState.songs[currentSongId].songName;
+        var votes = appState.currentState[i].votes + "";
+        var song_id = currentSongId+ "";
+        var cover_ins = appState.songs[currentSongId].albumCoverUrl;
+
+        var insert_song = ul.insert(
+	        { li, class:"item ", 
+	        	[
+	        		{span, class:"number_of_votes ", [votes]},
+	        		{span, class:"cover_image", []},
+	        		{span, class:"song_name", 
+	        			[
+	        				artist,
+	        				{span,class:"artist_song_line" ,"-\u0020"},
+	        				{span, class:"song_title",[song]}
+	        			]
+	        		},
+	        		{span, class:"vote_song", 
+	        			["vote",
+	        				{span, class:"song_id", [song_id]},
+	        			]
+	        		}
+	        		
+	        	]
+	        }
+	    );
+
+	     insert_song.$(.cover_image).style#background-image = "url('"+(cover_ins)+"')";
+    }
+}
+
+/**
+* Returns current date in the json format
+* dd/mm/yyyy
+*/
+function getCurrentDate(){
+
+	var endDate = new Date();
+    endDate = endDate.toString();
+    var endDate_ = endDate.split(",");
+    var day_name = endDate_[0];
+    var date = endDate_[1];
+    var date_ = date.split(" ");
+
+    var day = date_[0];
+    var month = date_ [1];
+    var year = date_[2];
+    var hour = date_[3];
+
+    switch (month){
+	  case "Jan":
+	    month = "01";
+	    break;
+	  case "Feb": 
+	  	month = "02";
+	    break;
+	  case "Mar": 
+	  	month = "03";
+	    break;
+	  case "Apr":
+	    month = "04";
+	    break;
+      case "May":
+      month = "05";
+	    break;
+      case "June": 
+	  	month = "06";
+	    break;
+	  case "July":
+	    month = "07";
+	    break;
+      case "Aug":
+      month = "08";
+	    break;
+	  case "Sept":
+      month = "09";
+	    break;
+      case "Oct": 
+	  	month = "10";
+	    break;
+	  case "Nov":
+	    month = "11";
+	    break;
+      case "Dec":
+      month = "12";
+	    break;
+	}
+
+	var current_date = day + "/"+month+"/"+year;
+	return current_date;
+}
+
+/**
+* Function that returns current month
+*/
+function getMonth(){
+
+	var endDate = new Date();
+    endDate = endDate.toString();
+    var endDate_ = endDate.split(",");
+    var day_name = endDate_[0];
+    var date = endDate_[1];
+    var date_ = date.split(" ");
+
+    var day = date_[0];
+    var month = date_ [1];
+    var year = date_[2];
+    var hour = date_[3];
+
+    switch (month){
+	  case "Jan":
+	    month = "01";
+	    break;
+	  case "Feb": 
+	  	month = "02";
+	    break;
+	  case "Mar": 
+	  	month = "03";
+	    break;
+	  case "Apr":
+	    month = "04";
+	    break;
+      case "May":
+        month = "05";
+	    break;
+      case "June": 
+	  	month = "06";
+	    break;
+	  case "July":
+	    month = "07";
+	    break;
+      case "Aug":
+        month = "08";
+	    break;
+	  case "Sep":
+        month = "09";
+	    break;
+      case "Oct": 
+	  	month = "10";
+	    break;
+	  case "Nov":
+	    month = "11";
+	    break;
+      case "Dec":
+        month = "12";
+	    break;
+	}
+
+	return month;
+}
+
+/**
+* Function that retunrs day
+*/
+function getDay(){
+
+	var endDate = new Date();
+    endDate = endDate.toString();
+    var endDate_ = endDate.split(",");
+    var day_name = endDate_[0];
+    var date = endDate_[1];
+    var date_ = date.split(" ");
+
+    var day = date_[0];
+    var month = date_ [1];
+    var year = date_[2];
+    var hour = date_[3];
+
+	return day;
+}
+
+/**
+* Function that return number day of the week
+* help to make the top of the week
+*/
+function dayOfTheWeek(){
+
+	var endDate = new Date();
+    endDate = endDate.toString();
+    var endDate_ = endDate.split(",");
+    var day_name = endDate_[0];
+    var date = endDate_[1];
+    var date_ = date.split(" ");
+
+    var day = date_[0];
+    var month = date_ [1];
+    var year = date_[2];
+    var hour = date_[3];
+
+    switch (day_name){
+	  case "Sun":
+	    day_name = "1";
+	    break;
+	  case "Mon": 
+	  	day_name = "2";
+	    break;
+	  case "Tue": 
+	  	day_name = "3";
+	    break;
+	  case "Wed":
+	    day_name = "4";
+	    break;
+      case "Thu":
+        day_name = "5";
+	    break;
+      case "Fri": 
+	  	day_name = "6";
+	    break;
+	  case "Sat":
+	    day_name = "7";
+	    break;
+	}
+
+	return day_name;
+}

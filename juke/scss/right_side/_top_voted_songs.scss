@@ -1,0 +1,102 @@
+#top_voted_song{
+	visibility: hidden;
+	position: absolute;
+	top: 49dip;
+	right:30dip;
+	left: 44dip;
+	bottom: 25dip;
+	background-color: $color_10;
+
+	header{
+		margin-top: 20dip;
+		margin-bottom: 8dip;
+		margin-left: 38dip;
+
+		span{
+			display: inline-block;
+		}
+
+		.back_button{
+			width: 15dip;
+			height: 15dip;
+			line-height: 23dip;
+			background-image: $back_button_normal;
+			background-size: 15dip 15dip;
+			background-repeat: no-repeat;
+			padding-right: 15dip;
+
+			&:hover{
+				cursor: pointer;
+				background-image: $back_button_hover;
+			}
+		}
+
+		.the_genre{
+			// margin-right: 15dip;
+			font-size: 23dip;
+			font-family: $font_2;
+			color: $color_3;
+		}
+	}
+
+	.top_voted_content{
+		// width: 260dip;
+	}
+
+	.period_top_songs{
+		border-bottom: 1dip solid $color_2;
+
+		span{
+			display: inline-block;
+			width: 108dip;//108
+			text-align: center;
+			line-height: 50dip;
+			font-family: $font_2;
+			font-size: 13dip;
+			text-transform: uppercase;
+			color: $color_3;
+
+			&:hover{
+				cursor: pointer;
+				background-color: $color_5;
+				color: $color_2;
+			}
+		}
+	}
+
+	.selected_genre_songs_wrapper{
+		height: 390dip;
+		overflow: hidden;
+	}
+
+	ul{
+		position: relative;
+		height: 380dip;
+		padding-left: 5dip;
+		
+		overflow: scroll-indicator;
+	  	vertical-scrollbar: my-v-scrollbar;
+	  	overflow: auto;
+	  	overflow-x: hidden;
+
+		li{
+			height: 38dip;
+			line-height: 38dip;
+			padding: 0;
+			margin: 0;
+			border-bottom: 1dip solid $color_6;
+			margin-right:5dip;
+
+			span{
+				display: inline-block;
+				line-height: 38dip;
+			}
+		}
+	}
+
+}
+
+.active{
+	background-color: $color_5;
+	color: #FFF!important;
+}

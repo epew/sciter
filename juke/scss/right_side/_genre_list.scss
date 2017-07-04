@@ -1,0 +1,133 @@
+#genres_list{
+	// visibility: hidden;
+	position: relative;
+	display: block;
+	width: 360dip;
+	height: 520dip;
+
+	.search_song_in_genres{
+		display: none;
+		position : absolute;
+		top: -1dip;
+		right: 10dip;
+		left: 14dip;
+		bottom: 25dip;
+		overflow: hidden;
+		background-color: $color_10;
+		ul{
+			margin-top:10dip;
+			margin-bottom: 10dip;
+			position: relative;
+			height: 470dip;
+
+			padding-left: 5dip;
+			
+			overflow: scroll-indicator;
+		  	vertical-scrollbar: my-v-scrollbar;
+		  	overflow: auto;
+		  	overflow-x: hidden;
+
+			li{
+				height: 38dip;
+				line-height: 38dip;
+				padding: 0;
+				margin: 0;
+				border-bottom: 1dip solid $color_6;
+				margin-right:5dip;
+
+				span{
+					display: inline-block;
+					line-height: 38dip;
+				}
+			}
+		}
+	}
+
+	span.vote_song_genres_text{
+		display: block;
+		width: 360dip;
+		margin-top: 28dip;
+		margin-bottom: 20dip;
+		font-family: $font_2;
+		font-size: 25dip;
+		text-align: center;
+		color: $color_3;
+	}
+
+	.genres_block{
+		width: 350dip;
+		height: 315dip;
+		overflow: scroll-indicator;
+	  	vertical-scrollbar: my-v-scrollbar;
+	  	overflow: auto;
+	  	overflow-x: hidden;
+	}
+
+	.genre_type{
+		display: inline-block;
+		height: 50dip;
+		width: 153dip;
+		margin-left: 15dip;
+		margin-bottom: 12dip;
+		background-color : $color_10;
+		text-align: center;
+		border-bottom : 1dip solid $color_3;
+		color: $color_5 ;
+
+		&:hover{
+			cursor: pointer;
+			border-bottom : 1dip solid $color_5;
+
+			span{
+				color: $color_5 ;
+			}
+		}
+
+		span{
+			width: 150dip;
+			height: 50dip;
+			line-height: 50dip;
+			text-align: center;
+			text-transform: uppercase;
+			font-size: 18dip;
+			font-family: $font_9;
+			color: $color_3;
+		}
+	}
+
+	.out_tops{
+		text-align: center;
+
+		span.undecided_text{
+			display: block;
+			margin-top: 20dip;
+			font-family: $font_2;
+			font-size: 25dip;
+			color: $color_5;
+		}
+
+		.see_our_tops_btn{
+			margin-top: 8dip;
+			font-size: 14dip;
+			font-family: $font_3;
+			text-align: center;
+			color : $color_2;
+
+			span{
+				position: relative;
+				left: 105dip;
+				display: block;
+				width: 150dip;
+				height: 30dip;
+				line-height: 27dip;
+				background-color: $color_3;
+				border-radius: 12dip;
+
+				&:hover{
+					cursor: pointer;
+					background-color: $color_5;
+				}
+			}
+		}
+	}
+}

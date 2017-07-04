@@ -1,0 +1,145 @@
+/**
+* This function has infinite rotation for the central disk (cover to my current playing song)
+* class: .disk_timer
+* property : aspect: Spin; 
+*/
+function Spin() {
+
+  var angle = 0;
+  var paused = false;
+  
+  function run() {
+    this.animate( function() 
+    {
+      if( paused ) 
+        return false;
+      ++angle;
+      this.style["transform"] = [rotate: angle * 1grad];
+      return true;
+    });
+  }
+  
+  this.pause = function(onOff) {
+    paused = onOff;
+    if(!paused)
+      run.call(this);
+  };
+  
+  run.call(this);
+}
+
+/**
+* Timer > cont downd time playing song
+*/
+function CountDown(){
+
+  var get_time = $(.remaining_playing_song_time).text;
+  var find_time = get_time.split(":");
+  var minutes = find_time[0];
+  var seconds = find_time[1];
+
+  var countDownTime = toInteger(minutes)*60 + toInteger(seconds);
+  var all_time = toInteger(minutes)*60 + toInteger(seconds);
+
+  var chart;
+  var a;
+  var b;
+  var c;
+  var d;
+
+    function countDownTimer() {
+      var get_time = $(.remaining_playing_song_time).value;
+       
+      var minutes = toInteger( countDownTime / 60 ) % 60;
+      var seconds = countDownTime % 60;
+      var result = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds);
+     
+      $(.remaining_playing_song_time).value = result;
+      $(.time_left).value =  result;
+
+        if(countDownTime == 0 ){ 
+           var current_id = $(.song_id_now_play).value;
+
+             for(var i = 0 ; i < appState.currentState.length; i++){
+                if( song === appState.currentState[current_id].songId){
+                    exists = true;
+                    appState.currentState[i].votes == 0;
+                }
+            }
+
+            playingSong();
+            topFive();
+        }
+
+        countDownTime = countDownTime - 1;
+
+        // Song progress draw
+        chart = $(#songprogress);
+        if($(#songprogress).value != null && $(#songprogress).value != ""){
+           // view.msgbox(#information, $(#songprogress).value);
+           PieChartOn(chart);
+        }
+       
+        a = countDownTime*100;
+        b = a/all_time;
+        c = toFloat(b)/100;
+        d = c;
+
+        chart.value = toFloat(1-d);
+
+       timeout(1s)
+        .then(function(){ 
+          countDownTimer(); 
+        });
+    }
+
+    countDownTimer();
+}
+
+// promise-aware timeout
+ function timeout(ms,rv = null) {
+    var oath = promise();
+    self.timer( ms, function() { oath(true, [rv]);} ) 
+    return oath;
+}
+
+/**
+* Song progress
+*/
+function PieChartOn(element){
+
+    const strokeWidth = 5; // px
+    const strokeColor = color(230,81,0); // orange
+    const circleColor = color(255,255,255); // white
+
+    var start = 0; 
+    var value = 0.02; 
+
+    // view.msgbox(#information, element);
+    function render(gfx) 
+    {
+      var (w,h) = this.box(#dimension); 
+      var (x,y) = (w/2, h/2);  
+      var r = Integer.min(w,h) / 2 - strokeWidth / 2;  
+      
+      gfx.strokeWidth(strokeWidth + 0.5)
+         .strokeColor(circleColor)
+         .arc(x,y,r,r, 0deg, 360deg)
+         .strokeColor(strokeColor)
+         .arc(x,y,r,r, 360deg * start, 360deg * value);
+    }  
+    
+    element.paintContent = render;
+    
+    // redefining property 'value' on that element
+    element["value"] = property(v) {
+      get return value;
+      set {
+        value = v;
+        element.refresh();
+      }
+    };
+}
+
+   
+    

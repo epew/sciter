@@ -1,0 +1,148 @@
+*[hidden] {
+    display:none;
+}
+
+@set my-v-scrollbar
+{
+  .prev { display:none; }
+  .next { display:none; }
+  
+  .base,
+  .next-page, 
+  .prev-page { background: transparent;}
+  
+  .slider    { background: $color_3; }
+ 
+  .base:disabled { background: #aaa; }
+
+  .base { width: 6dip; } /* explicit declaration of its width */
+  .corner { background: transparent; }
+}
+
+
+html {
+    background:transparent;
+    overflow: hidden;
+}
+
+body {
+	width: 800dip;
+	height: 600dip;
+    min-height: min-content;
+    background: #fff;
+ 	overflow: hidden;
+ 	box-shadow: 0 0 10dip rgba(0,0,0,.2);
+    margin: 10dip;
+    flow:horizontal;
+	background-image : $image_backgrount_bottom;
+	background-repeat : no-repeat;
+	background-position: 100% 100%;
+}
+
+ul{
+	li{
+		list-style: none;
+	}
+}
+
+header{
+	height: 30dip;
+
+	button{
+		float: right;
+		border:none;
+		padding-left: 10dip;
+		background:transparent;
+		font-size: 14dip;
+		color: $color_1;
+
+		&:hover{
+			cursor: pointer;
+			color: $color_5;
+		}
+	}
+
+	.close_player{
+		padding-right: 10dip;
+	}
+}
+
+span.number_of_votes{
+		width: 25dip;
+		margin-left:5dip;
+		font-family: $font_7;
+		font-size: 12dip;
+		color: $color_5;
+	}
+
+span.cover_image{
+	prototype : addCover;
+	position: relative;
+	width: 25dip;
+	height:25dip;
+	top: 7dip;
+	color: transparent;
+	font-size:0;
+	background-color: $color_7;
+	border-radius: 50%;
+	background-size: 25dip 25dip;
+	background-repeat: no-repeat;
+}
+
+span.song_cover{
+	visibility: hidden;
+	display:none;
+	width:0;
+	height:0;
+}
+
+span.song_name{
+	margin-left: 10dip;
+	
+	width: 185dip;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-family: $font_7;
+	font-size: 12dip;
+	color: $color_8;
+}
+
+span.artist_song_line{
+	padding-left: 3dip;
+}
+
+span.song_title{
+	color: $color_8;
+	font-family: $font_1;
+	font-size: 13dip;
+}
+
+span.vote_song{
+	prototype : addVoteEvents;
+	display:inline-block;
+	padding-right: 5dip;
+	float: right;
+	text-transform: uppercase;
+	font-family: $font_6;
+	color: $color_3;
+
+	&:hover{
+		cursor: pointer;
+		color: $color_5;
+	}
+}
+span.song_id{
+	visibility:hidden;
+}
+
+.side{
+	display: inline-block;
+}
+
+.hide{
+	visibility: hidden;
+}
+
+.show{
+	 visibility: visible;
+}

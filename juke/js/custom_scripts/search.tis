@@ -1,0 +1,321 @@
+ /**
+ * Hide the "search your favorite song" text
+ * when the search input it's focused
+ */
+$(.find_song).subscribe("focus", function(){
+ 	$(.hide_on_focus).style#display="none";
+
+ });
+
+$(.find_song_top_voted).on("focus", function(){
+ 	$(.search_in_top_text_hide).style#display="none";
+ });
+
+ $(.find_song_from_genres).on("focus", function(){
+ 	$(.hide_text_search_genres).style#display="none";
+ });
+
+/**
+* If the user leaves the search input and it's empty,
+* we are showing the "search your favorite song" text
+*/
+ $(.find_song).subscribe("focusout", function(){
+
+ 	var input_value =  $(.find_song).value;
+
+ 	if(input_value == ""){
+ 		$(.hide_on_focus).style#display="block";
+ 		$(#request_song).style#visibility = "hidden";
+ 	}
+ });
+
+$(.find_song_from_genres).on("focusout", function(){
+
+	var input_value = $(.find_song_from_genres).value;
+
+ 	if(input_value == ""){
+ 		$(.hide_text_search_genres).style#display="block";
+ 		$(.search_song_in_genres).style#display = "none";
+ 		$(#request_song).style#visibility = "hidden";
+ 	}
+ 	
+ });
+
+ $(.find_song_top_voted).on("focusout", function(){
+ 	
+ 	var input_value = $(.find_song_top_voted).value;
+
+ 	if(input_value == ""){
+ 		$(.search_in_top_text_hide).style#display="block";
+ 		$(#request_song).style#visibility = "hidden";
+ 	}
+ });
+
+/**
+* Do stuff when the value of the search input it's changing > when you are in a selected genre section
+*/
+ $(.find_song).subscribe("change", function(){
+
+ 	$(#request_song).style#visibility="hidden";
+
+ 	var input_value =  $(.find_song).value;
+ 	var ul = $(.selected_genre_songs_list);
+
+ 	var json_genres = appState.genres;
+ 	var genre = $(.the_genre).value +"";
+ 	var key;
+
+	ul.clear();
+
+	findSong(ul,input_value);		 
+
+	for(var i=0; i < json_genres.length; i++){
+
+		var test_genre = appState.genres[i];
+		if(genre === test_genre){
+			 key = i;
+		}
+	}
+
+	if(input_value == ""){
+		showMusic(genre, key);
+	}
+ 	
+ });
+
+/**
+* Do stuff when the value of the search input it's changing > when you are in top voted song section
+*/
+ $(.find_song_top_voted).subscribe("change", function(){
+
+ 	$(#request_song).style#visibility="hidden";
+
+ 	var input_value =  $(.find_song_top_voted).value;
+ 	var ul = $(.top_list);
+
+	ul.clear();
+	findSong(ul,input_value);
+
+	if(input_value == ""){
+		if($(.this_week).@.hasClass("active")){
+
+			topWeek();
+
+		}else if($(.this_month).@.hasClass("active")){
+
+			topMonth();
+
+		}else if($(.all_time).@.hasClass("active")){
+
+			allTimeTop();
+		}
+	}	
+
+ });
+
+/**
+* Do stuff when the value of the search input it's changing > when you are in all the genres block
+*/
+ $(.find_song_from_genres).subscribe("change", function(){
+
+ 	$(#request_song).style#visibility="hidden";
+
+ 	$(.search_song_in_genres).style#display = "block";
+ 	var input_value =  $(.find_song_from_genres).value;
+
+ 	var ul = $(.genre_find_song);
+
+ 	ul.style#display="block";
+	ul.clear();
+	findSong(ul,input_value);
+});
+
+class filterSongs:Behavior {
+
+	function onClick(){
+
+		var _self = this;
+		var letter = _self.value + "";
+		var item = $(.letter);
+		var cont_item = $(.letter_filter);
+
+		var ul = $(.selected_genre_songs_list);
+		var json_genres = appState.genres;
+		var genre = $(.the_genre).value + "";
+		var key ;
+
+		for(var i=0; i< appState.genres.length; i++){
+			var genre_test = appState.genres[i] ;
+			if(appState.genres[i] === genre){
+				key = i;
+			}
+		}
+
+		if(_self.@.hasClass("filter_active")){
+
+			_self.@.removeClass("filter_active");
+			ul.clear();
+			showMusic(genre,key);
+		}
+		else{
+			
+			_self.@.addClass("filter_active");
+			ul.clear();
+			
+		    for(var i = 0; i < appState.categories[key].length; i++){
+
+				var song_votes = 0 + "";	
+
+			    var song = appState.categories[key][i];
+			    var song_id = song + "";
+			    
+			    var artist_ins = appState.songs[song].artist;
+			    var artist = artist_ins+ "";
+			    var artist_first_letter = artist.charAt(0);
+
+			    var song_ins = appState.songs[song].songName;
+
+		      	var cover_class;
+			    var cover_ins = appState.songs[song].albumCoverUrl;
+			    cover_class = song+"_cover";
+			    
+			    for(var j=0; j< appState.currentState.length;j++){
+			    	if(appState.currentState[j].songId === song){
+			    		song_votes = appState.currentState[j].votes + "";
+			    	}
+			    }
+			    
+			    if( artist_first_letter == letter.toUpperCase()){
+			    	
+				    var insert_song = ul.insert(
+				        { li, class:"item "+genre, 
+				        	[
+				        		{span, class:"number_of_votes ", [song_votes]},
+				        		{span, class:"cover_image", [song_id]},
+				        		{span, class:"song_name",
+				        			[
+				        				artist_ins,
+				        				{span,class:"artist_song_line" ,"-\u0020"},
+				        				{span, class:"song_title",[song_ins]}
+				        			]
+				        		},
+				        		{span, class:"vote_song", 
+				        			["vote",
+				        				{span, class:"song_id", [song_id]},
+				        			]
+				        		}
+				        	]
+				        }
+				    );
+
+				    insert_song.$(.cover_image).style#background-image = "url('"+(cover_ins)+"')";
+
+				}
+			}   
+			
+		}
+
+	}
+}
+
+/**
+* Function that find requested songs
+*/
+function findSong(ul, input_value){
+
+	var test = 0;
+
+	for(var i=0; i<appState.songs.length; i++){
+
+		var artist = appState.songs[i].artist + "";
+		var song = appState.songs[i].songName + "";
+		var cover_ins =appState.songs[i].albumCoverUrl + "";
+		var votes = appState.currentState[i].votes + "";
+
+		var artist_test = artist.toLowerCase();
+		var song_test = song.toLowerCase();
+		var word_test = input_value.toLowerCase();
+
+		if(song_test.indexOf(word_test) != -1 || artist_test.indexOf(word_test) != -1){
+
+			test = 1;
+
+			var insert_song = ul.insert(
+		        { li, class:"item ", 
+		        	[
+		        		{span, class:"number_of_votes", [votes]},
+		        		{span, class:"cover_image"},
+		        		{span, class:"song_name",
+		        			[
+		        				artist,
+		        				{span,class:"artist_song_line" ,"-\u0020"},
+		        				{span, class:"song_title",[song]}
+		        			]
+		        		},
+		        		{span, class:"vote_song", 
+		        			["vote",
+		        				{span, class:"song_id"},
+		        			]
+		        		}
+		        	]
+		        }
+		    );
+
+		    insert_song.$(.cover_image).style#background-image = "url('"+(cover_ins)+"')";
+		} 
+
+		if(test == 0){
+			$(#request_song).style#visibility = "visible";
+		}
+	}		
+}
+
+/**
+* Hide the request a song section if you hit the back button
+*/
+$(.back_from_request).on("click", function(){
+
+	$(.search_in_top_text_hide).style#display="none";
+	$(#request_song).style#visibility = "hidden";
+	$(.search_song_in_genres).style#display = "none";
+
+
+	//if we are in the top container
+	if($(.this_week).@.hasClass("active")){
+
+		topWeek();
+
+	}else if($(.this_month).@.hasClass("active")){
+
+		topMonth();
+
+	}else if($(.all_time).@.hasClass("active")){
+
+		allTimeTop();
+	}
+
+
+	//if we selected a genre
+	
+	// var input_value =  $(.find_song).value;
+ // 	var ul = $(.selected_genre_songs_list);
+
+ // 	var json_genres = appState.genres;
+ // 	var genre = $(.the_genre).value +"";
+ // 	var key;
+
+	// findSong(ul,input_value);		 
+
+	// for(var i=0; i < json_genres.length; i++){
+
+	// 	var test_genre = appState.genres[i];
+	// 	if(genre === test_genre){
+	// 		 key = i;
+	// 	}
+	// }
+
+	// ul.clear();
+	// showMusic(genre, key);
+	
+
+});

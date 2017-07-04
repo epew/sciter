@@ -1,0 +1,46 @@
+.search_wrapper{
+	position: relative;
+	margin-right: 5dip;
+	margin-left: 15dip;
+	width:335dip;
+	height: 25dip;
+
+	span{
+		position:relative;
+		display: block;	
+		width: 335dip;
+		height: 16dip;
+		line-height: 16dip;
+		padding-bottom: 5dip;
+		border-bottom: 1dip solid $color_9;
+		text-align: center;
+		font-family: $font_8;
+		font-size: 16dip;
+		color: $color_3;
+	}
+
+	input{
+		position:relative;
+		width: 335dip;
+		bottom: 25dip;
+		border: none;
+		background: transparent;
+		text-align: center;
+		color: $color_3;
+	}
+}
+
+.search_favorite_song_in_top_container{
+	position:absolute;
+	right:14dip;
+	top:-22dip;
+
+	.search_in_top_text_hide{
+
+	}
+}
+
+.search_from_genres{
+	position:absolute;
+	top: -23dip!important;
+}
